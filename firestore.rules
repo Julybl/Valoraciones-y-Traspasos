@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function allowedAdmin() {
+      return signedIn() && request.auth.token.email in [
+        'cha-in-cheon@draft-team.com',
+        'lee-yong-un@draft-team.com',
+        'ishizaki@draft-team.com',
+        'tezcat@draft-team.com',
+        'bai-long@draft-team.com',
+        'olivia-aiku@draft-team.com',
+        'shidou-ryusei@draft-team.com',
+        'ricardo-rigo@draft-team.com',
+        'charles-chevalier@draft-team.com',
+        'gabriel-garcia@draft-team.com'
+      ];
+    }
+    match /players/{playerId} {
+      allow read, create, update, delete: if allowedAdmin();
+    }
+    match /auditLogs/{logId} {
+      allow read, create: if allowedAdmin();
+      allow update, delete: if false;
+    }
+    match /transfers/{transferId} {
+      allow read, create: if allowedAdmin();
+      allow update, delete: if false;
+    }
+  }
+}

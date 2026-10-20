@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071019">
+  <title>UNIVERSO FOOTBALL VALORACIONES Y MERCADO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <main id="login-screen" class="login-screen">
+    <section class="login-art">
+      <div class="brand"><span class="brand-mark">$</span><span>UNIVERSO <b>FOOTBALL</b></span></div>
+      <div class="eyebrow"><span class="pulse"></span> ACCESO SOLO ADMINISTRADORES / 01</div>
+      <h1>UNIVERSO<br><em>FOOTBALL</em></h1>
+      <p>Página oficial para el mercado de fichajes.</p>
+      <div class="login-orbit"><div class="orbit-ring"></div><div class="orbit-ball">$</div><span class="orbit-label label-one">INTERCAMBIAR</span><span class="orbit-label label-two">TRANSFERIR</span><span class="orbit-label label-three">RANKING</span></div>
+      <div class="login-foot">PÁGINA PRIVADA <span>●</span> EST. 2026</div>
+    </section>
+    <section class="login-panel">
+      <div class="mobile-brand brand"><span class="brand-mark">S</span><span>PROJECT <b>STRIKER</b></span></div>
+      <div class="login-card">
+        <div class="eyebrow">ZONA RESTRINGIDA</div>
+        <h2>Iniciar sesión<span class="accent">.</span></h2>
+        <p class="muted">Acceso exclusivo para administradores autorizados.</p>
+        <form id="login-form">
+          <label for="login-user">NOMBRE DE USUARIO</label>
+          <input
+            id="login-user"
+            name="username"
+            type="text"
+            autocomplete="username"
+            autocapitalize="none"
+            placeholder="Ej. Cha in Cheon"
+            aria-describedby="login-error"
+            required
+          >
+
+          <label for="login-password">CONTRASEÑA</label>
+          <div class="password-wrap">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+            <button type="button" class="reveal" id="toggle-password" aria-label="Mostrar contraseña">◉</button>
+          </div>
+          <button class="btn btn-primary full" type="submit" id="login-button">ACCEDER AL MERCADO <span>↗</span></button>
+          <p id="login-error" class="error-message"></p>
+        </form>
+        <div class="secure-note"><span>◈</span> Sesión autenticada · Datos sincronizados</div>
+      </div>
+      <p class="login-disclaimer">Si no tienes una cuenta habilitada, contacta al administrador principal.</p>
+    </section>
+  </main>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand sidebar-brand" href="#"><span class="brand-mark"></span><span>UNIVERSO <b>FOOTBALL</b></span></a>
+      <div class="side-label">MERCADO</div>
+      <button class="nav-item active" data-view="overview"><span>▦</span> Centro de mando</button>
+      <button class="nav-item" data-view="players"><span>◉</span> Base de jugadores</button>
+      <button class="nav-item" data-view="editor"><span>＋</span> Valorar jugador</button>
+      <button class="nav-item" data-view="ranking"><span>↗</span> Top de mercado</button>
+      <button class="nav-item" data-view="transfers"><span>⇄</span> Fichajes</button>
+      <button class="nav-item" data-view="history"><span>◷</span> Historial de cambios</button>
+      <div class="sidebar-bottom">
+        <div class="online-status"><span class="pulse"></span><span><b>BASE ONLINE</b><small>Sincronización activa</small></span></div>
+        <button id="logout-button" class="logout-button">↪ Cerrar sesión</button>
+        <div class="sidebar-version">PLAYER MARKET <span>v1.0</span></div>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+        <div class="breadcrumb">ADMIN NETWORK <span>/</span> <b id="crumb-title">CENTRO DE MANDO</b></div>
+        <div class="topbar-right">
+          <span class="live-pill"><i></i> LIVE DATABASE</span>
+          <div class="avatar" id="user-avatar" title="Cambiar foto de perfil" role="button" tabindex="0" aria-label="Cambiar foto de perfil">A</div>
+          <input id="profile-photo-input" type="file" accept="image/*,.jps" hidden>
+          <div class="user-mini">
+            <b id="top-username">Administrador</b>
+            <small>ADMINISTRADOR</small>
+            <div class="profile-photo-actions">
+              <button type="button" id="change-profile-photo">Cambiar foto</button>
+              <button type="button" id="remove-profile-photo">Quitar</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section id="welcome-banner" class="welcome-banner">
+          <div><div class="eyebrow">PANEL DE CONTROL / TEMPORADA 01</div><h1>Hola, <span id="welcome-name">Administrador</span><span class="accent">.</span></h1><p>¿A quién le ponemos valor hoy? El mercado está en tus manos.</p></div>
+          <div class="banner-symbol">$<span>01</span></div>
+        </section>
+
+        <section id="view-overview" class="view active-view">
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>JUGADORES VALORADOS</span><span class="stat-icon">◉</span></div><div class="stat-number" id="stat-players">0</div><div class="stat-foot">En la base de datos</div></article>
+            <article class="stat-card"><div class="stat-top"><span>VALOR TOTAL DEL MERCADO</span><span class="stat-icon gold">◈</span></div><div class="stat-number"><span id="stat-value">0</span><small> MON</small></div><div class="stat-foot">Suma de valoraciones actuales</div></article>
+            <article class="stat-card"><div class="stat-top"><span>VALOR PROMEDIO</span><span class="stat-icon">⌁</span></div><div class="stat-number" id="stat-average">0</div><div class="stat-foot">Monedas por jugador</div></article>
+            <article class="stat-card"><div class="stat-top"><span>REGISTROS DE AUDITORÍA</span><span class="stat-icon">◷</span></div><div class="stat-number" id="stat-history">0</div><div class="stat-foot">Acciones registradas</div></article>
+          </div>
+          <div class="section-heading"><div><div class="eyebrow">VISTA RÁPIDA</div><h2>Radar del mercado</h2></div><button class="btn btn-ghost" data-goto="ranking">Ver ranking ↗</button></div>
+          <div class="dashboard-grid">
+            <article class="panel chart-panel"><div class="panel-heading"><div><h3>Distribución por posición</h3><p>Composición actual de la plantilla</p></div><span class="panel-tag">ROLES</span></div><div id="role-chart" class="role-chart"><div class="empty-state">Todavía no hay jugadores valorados.</div></div></article>
+            <article class="panel"><div class="panel-heading"><div><h3>Últimos movimientos</h3><p>Actividad reciente de administradores</p></div><span class="panel-tag">LOG</span></div><div id="recent-activity" class="activity-list"><div class="empty-state">Los cambios aparecerán aquí.</div></div></article>
+          </div>
+          <div class="section-heading"><div><div class="eyebrow">SCOUTING</div><h2>Jugadores destacados</h2></div><button class="btn btn-ghost" data-goto="players">Ver base completa ↗</button></div>
+          <div id="featured-players" class="featured-grid"><div class="empty-state">Agregá tu primer jugador para empezar.</div></div>
+        </section>
+
+        <section id="view-players" class="view">
+          <div class="page-heading"><div><div class="eyebrow">SCOUTING DATABASE</div><h1>Base de jugadores<span class="accent">.</span></h1><p>Consultá, corregí y administrá las valoraciones del mercado.</p></div><button class="btn btn-primary" data-goto="editor">＋ Valorar jugador</button></div>
+          <div class="toolbar"><div class="searchbox"><span>⌕</span><input id="player-search" placeholder="Buscar jugador..." type="search"></div><select id="role-filter"><option value="">Todos los roles</option><option>Portero</option><option>Defensor</option><option>Mediocampista</option><option>Delantero</option></select><select id="sort-filter"><option value="value-desc">Mayor valor</option><option value="value-asc">Menor valor</option><option value="name-asc">Nombre A-Z</option><option value="updated-desc">Última modificación</option></select></div>
+          <div id="players-table-wrap" class="panel table-panel"></div>
+        </section>
+
+        <section id="view-editor" class="view">
+          <div class="page-heading"><div><div class="eyebrow">PLAYER VALUATION PROTOCOL</div><h1 id="editor-title">Valorar jugador<span class="accent">.</span></h1><p>Completá las estadísticas. La fórmula calcula un valor de mercado o podés ajustarlo manualmente.</p></div><div class="autosave-state" id="autosave-state"><span class="pulse"></span> Guardado automático</div></div>
+          <form id="player-form" class="editor-layout">
+            <div class="editor-main">
+              <article class="panel form-panel">
+                <div class="form-section-title"><span class="step-number">01</span><div><h3>Identidad del jugador</h3><p>Elegí su posición y registrá su nombre.</p></div></div>
+                <div class="form-grid identity-grid">
+                  <div class="field"><label for="player-role">ROL DE FÚTBOL *</label><select id="player-role" required><option value="">Seleccioná un rol</option><option>Portero</option><option>Defensor</option><option>Mediocampista</option><option>Delantero</option></select></div>
+                  <div class="field"><label for="player-name">NOMBRE DEL JUGADOR *</label><input id="player-name" maxlength="70" placeholder="Ej. Oliver Atom" required></div>
+                </div>
+                <div class="field"><label for="player-team">EQUIPO / CLUB (OPCIONAL)</label><input id="player-team" maxlength="70" placeholder="Ej. New Team"></div>
+              </article>
+              <article class="panel form-panel">
+                <div class="form-section-title"><span class="step-number">02</span><div><h3>Estadísticas de rendimiento</h3><p>Ingresá los números reales o acordados por el team. Los campos cambian según el rol.</p></div></div>
+                <div id="metrics-fields" class="form-grid metrics-grid"><div class="empty-state">Primero elegí un rol.</div></div>
+                <div class="field notes-field"><label for="player-notes">NOTAS DEL SCOUT (OPCIONAL)</label><textarea id="player-notes" rows="3" maxlength="500" placeholder="Observaciones, correcciones pendientes, contexto de la valoración..."></textarea></div>
+              </article>
+              <div class="editor-actions"><button type="button" id="cancel-edit" class="btn btn-ghost">Cancelar</button><button type="submit" class="btn btn-primary" id="save-player-button">GUARDAR VALORACIÓN <span>↗</span></button></div>
+            </div>
+            <aside class="editor-aside">
+              <article class="valuation-card">
+                <div class="eyebrow">LIVE VALUATION</div>
+                <div class="valuation-role" id="preview-role">SIN POSICIÓN</div>
+                <div class="valuation-name" id="preview-name">Nuevo jugador</div>
+                
+                <div class="valuation-score">
+                  <div style="display: flex; align-items: baseline; gap: 6px;">
+                    <input id="manual-market-coins" type="number" min="0" max="120" value="0" style="font-family: var(--display); font-size: 50px; width: 130px; background: transparent; border: 1px dashed #28546a; border-radius: 8px; color: var(--text); padding: 0 6px; outline: none;" />
+                  </div>
+                  <span>MONEDAS<br>DE MERCADO</span>
+                </div>
+
+                <div class="value-meter"><div id="value-meter-fill"></div></div>
+                <div class="valuation-cap"><span>0 MON</span><span>TOPE 120 MON</span></div>
+                <div class="valuation-breakdown" id="valuation-breakdown">
+                  <div><span>Valoración bruta</span><b>—</b></div>
+                  <div><span>Penalizaciones</span><b>—</b></div>
+                  <div><span>Valoración total</span><b>—</b></div>
+                </div>
+                <p class="formula-note">Podés modificar las monedas manualmente en el campo superior o se calculan automáticamente con el rendimiento.</p>
+              </article>
+
+              <article class="panel save-note"><span class="save-icon">◈</span><div><b>Guardado seguro</b><p>Los registros se sincronizan con la base de datos. Cada alta, edición y eliminación queda en el historial.</p></div></article>
+            </aside>
+          </form>
+        </section>
+
+        <section id="view-ranking" class="view">
+          <div class="page-heading"><div><div class="eyebrow">TRANSFER MARKET INDEX</div><h1>Top del mercado<span class="accent">.</span></h1><p>Ranking automático ordenado por valor final de mercado.</p></div><span class="panel-tag">LIVE RANKING</span></div>
+          <div id="ranking-podium" class="podium"></div><div id="ranking-list" class="panel ranking-list"></div>
+        </section>
+
+        <section id="view-transfers" class="view">
+          <div class="page-heading"><div><div class="eyebrow">TRANSFER NEGOTIATIONS</div><h1>Mercado de fichajes<span class="accent">.</span></h1><p>Registrá traspasos, préstamos y movimientos ficticios del team.</p></div></div>
+          <div class="transfer-layout">
+            <form id="transfer-form" class="panel form-panel">
+              <div class="form-section-title"><span class="step-number">⇄</span><div style="display:flex; justify-content:space-between; align-items:center; width:100%;"><div><h3 id="transfer-form-title">Registrar movimiento</h3><p>Dejá constancia de cada operación.</p></div><button type="button" id="cancel-transfer-edit" class="btn btn-ghost hidden" style="font-size:9px; padding:6px 10px;">Cancelar edición</button></div></div>
+              <div class="field"><label for="transfer-player">JUGADOR *</label><select id="transfer-player" required><option value="">Seleccioná un jugador</option></select></div>
+              <div class="form-grid">
+                <div class="field"><label for="transfer-type">TIPO DE OPERACIÓN</label><select id="transfer-type"><option>Traspaso</option><option>Préstamo</option><option>Renovación</option><option>Cláusula ejecutada</option><option>Otro</option></select></div>
+                <div class="field"><label for="transfer-fee">VALOR (MONEDAS)</label><input id="transfer-fee" type="number" min="0" max="999999" value="0" required></div>
+              </div>
+              <div class="form-grid">
+                <div class="field"><label for="transfer-from">CLUB / ORIGEN</label><input id="transfer-from" maxlength="70" placeholder="Club anterior"></div>
+                <div class="field"><label for="transfer-to">CLUB / DESTINO</label><input id="transfer-to" maxlength="70" placeholder="Nuevo club"></div>
+              </div>
+              <div class="field"><label for="transfer-notes">DETALLES</label><textarea id="transfer-notes" rows="3" maxlength="300" placeholder="Condiciones, duración, observaciones..."></textarea></div>
+              <button class="btn btn-primary full" type="submit" id="submit-transfer-button">CONFIRMAR MOVIMIENTO ↗</button>
+            </form>
+            <article class="panel transfer-history-panel"><div class="panel-heading"><div><h3>Operaciones recientes</h3><p>Registro de fichajes del mercado</p></div></div><div id="transfer-list" class="transfer-list"></div></article>
+          </div>
+        </section>
+
+        <section id="view-history" class="view">
+          <div class="page-heading"><div><div class="eyebrow">AUDIT TRAIL / TRANSPARENCY</div><h1>Historial de cambios<span class="accent">.</span></h1><p>Quién hizo qué, sobre qué registro y cuándo. Los eventos se registran automáticamente.</p></div><button id="export-history" class="btn btn-ghost">↓ Exportar CSV</button></div>
+          <div class="toolbar"><div class="searchbox"><span>⌕</span><input id="history-search" placeholder="Buscar usuario, acción o jugador..." type="search"></div><select id="history-action-filter"><option value="">Todas las acciones</option><option>CREAR</option><option>EDITAR</option><option>ELIMINAR</option><option>FICHAJE</option></select></div>
+          <div id="history-list" class="panel history-list"></div>
+        </section>
+        
+        <footer class="site-footer">
+          <div class="footer-brand"><span class="brand-mark">S</span> PROJECT STRIKER</div>
+          <p>Página hecha por <b>Olivia Aiku</b> con ayuda de <b>Goldie Lemmon</b>.</p>
+          <span class="footer-code">HECHO PARA LOS MEJORES JUGADORES © 2026</span>
+        </footer>
+      </div>
+    </section>
+  </div>
+
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-symbol">!</div>
+      <h3 id="modal-title">Confirmar acción</h3>
+      <p id="modal-message">¿Querés continuar?</p>
+      <div class="modal-actions"><button id="modal-cancel" class="btn btn-ghost">Cancelar</button><button id="modal-confirm" class="btn btn-danger">Confirmar</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
